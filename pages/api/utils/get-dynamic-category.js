@@ -17,6 +17,11 @@ export const getDynamicCategory = async (endpoint) => {
           ? getLink.replace(BASE_URL, VERCEL_BASE_URL + "/detailpost/")
           : VERCEL_BASE_URL + "/detailpost/" + getLink;
 
+      const slug =
+        endpoint === "hashtag/Commentary"
+          ? getLink.replace(BASE_URL, "/")
+          : "/" + getLink;
+
       const pusblised_at = $(el)
         .find("span.date")
         .clone()
@@ -44,6 +49,7 @@ export const getDynamicCategory = async (endpoint) => {
         image,
         category,
         pusblised_at,
+        slug,
       });
     });
 
@@ -114,6 +120,8 @@ export const getDynamicCategory = async (endpoint) => {
       const premium_badge = badge === "" ? "not premium" : badge;
       const image = $(".imageLatest", el).find("img").attr("data-src");
       const pusblised_at = $(el).find(".latestDetail span.date").last().text();
+
+      console.log("LINK", link);
 
       posts.push({
         link,
