@@ -54,6 +54,11 @@ export const getDynamicCategory = async (endpoint) => {
       "/detailpost" +
       $(".bigHeadline .descNews a").next().attr("href").replace(".html", "");
 
+    const slug = $(".bigHeadline .descNews a")
+      .next()
+      .attr("href")
+      .replace(".html", "");
+
     const image = $("figure img").attr("data-src");
     const image_desc = $("figcaption").text().trim();
     const headline = $(".descNews p").first().text().trim();
@@ -68,6 +73,7 @@ export const getDynamicCategory = async (endpoint) => {
       category,
       image_desc,
       pusblised_at,
+      slug,
     };
 
     const currentPage = $("span.currentPagi input").attr("value");
@@ -99,6 +105,11 @@ export const getDynamicCategory = async (endpoint) => {
         "/detailpost" +
         $(el).find(".imageLatest a").attr("href").replace(".html", "");
 
+      const slug = $(el)
+        .find(".imageLatest a")
+        .attr("href")
+        .replace(".html", "");
+
       const category = $(el).find(".dt-news").text();
       const premium_badge = badge === "" ? "not premium" : badge;
       const image = $(".imageLatest", el).find("img").attr("data-src");
@@ -112,6 +123,7 @@ export const getDynamicCategory = async (endpoint) => {
         category,
         pusblised_at,
         premium_badge,
+        slug,
       });
     });
 
