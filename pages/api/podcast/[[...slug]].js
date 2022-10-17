@@ -18,6 +18,11 @@ export default async function handler(req, res) {
       .replace(BASE_URL, VERCEL_BASE_URL + "/detailpodcast/")
       .replace(".html", "");
 
+    const slugPodcast = $(".boxPodcast a")
+      .attr("href")
+      .replace(BASE_URL, "")
+      .replace(".html", "");
+
     const published_at = $(".boxPodcast span.date")
       .first()
       .clone()
@@ -37,6 +42,7 @@ export default async function handler(req, res) {
       image,
       duration,
       published_at,
+      slug: slugPodcast,
     };
 
     const podcast = [];
@@ -56,6 +62,12 @@ export default async function handler(req, res) {
         .replace(BASE_URL, VERCEL_BASE_URL + "/detailpodcast/")
         .replace(".html", "");
 
+      const slug = $(el)
+        .find("a")
+        .attr("href")
+        .replace(BASE_URL, "")
+        .replace(".html", "");
+
       const image = $(el).find("img").attr("data-src");
       const title = $(el).find("h5.titleHlg").text().trim();
       const duration = $(el).find("span.timepod").text().trim();
@@ -66,6 +78,7 @@ export default async function handler(req, res) {
         image,
         duration,
         published_at,
+        slug,
       });
     });
 

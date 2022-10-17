@@ -41,6 +41,13 @@ export default async function search(req, res) {
         .replace(BASE_URL, VERCEL_BASE_URL + "/detailpost/")
         .replace(BASE_URL_SLUG, VERCEL_BASE_URL + "/detailpost/");
 
+      const slug = $(el)
+        .find(".gsc-thumbnail-inside a.gs-title")
+        .attr("href")
+        .replace(".html", "")
+        .replace(BASE_URL, "")
+        .replace(BASE_URL_SLUG, "");
+
       const headline = turndownService.turndown(headline_dom).trim();
       const image = $(el).find(".gs-image-box img.gs-image").attr("src");
       const premium_badge = image === ENCRYPTED_IMG ? "premium" : "not premium";
@@ -51,6 +58,7 @@ export default async function search(req, res) {
         image,
         headline,
         premium_badge,
+        slug,
       });
     });
 
